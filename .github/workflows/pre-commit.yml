@@ -6,6 +6,9 @@ on:
         - master
         - feature
 
+permissions:
+  contents: read
+
 jobs:
   precommit:
     runs-on: ubuntu-latest
