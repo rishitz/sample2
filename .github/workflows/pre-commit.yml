@@ -36,3 +36,7 @@ jobs:
       - name: Run pre-commit
         run: |
           pre-commit run --all-files
+
+      - name: Check the logs
+        run: |
+          cat /home/runner/.cache/pre-commit/pre-commit.log | tail -20
