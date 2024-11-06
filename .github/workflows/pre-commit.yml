@@ -53,7 +53,6 @@ on:
     branches: 
         - master
         - feature
-        
 
 jobs:
   pre-commit:
