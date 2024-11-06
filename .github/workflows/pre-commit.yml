@@ -2,7 +2,7 @@
 
 # on:
 #   pull_request:
-#     branches: 
+#     branches:
 #         - master
 #         - feature
 
@@ -34,7 +34,7 @@
 #       - name: Install the git hook scripts
 #         run: |
 #           pre-commit install
-          
+
 #       # Step 5: Run pre-commit hooks
 #       - name: Run pre-commit
 #         run: |
@@ -45,19 +45,18 @@
 #         run: |
 #           cat /home/runner/.cache/pre-commit/pre-commit.log | tail -20
 
-
 name: pre-commit hooks
 
 on:
   pull_request:
-    branches: 
-        - master
-        - feature
+    branches:
+      - master
+      - feature
 
 jobs:
   pre-commit:
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v3
-    - uses: actions/setup-python@v3
-    - uses: pre-commit/action@v3.0.1
+      - uses: actions/checkout@v3
+      - uses: actions/setup-python@v3
+      - uses: pre-commit/action@v3.0.1
