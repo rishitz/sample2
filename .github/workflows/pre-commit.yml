@@ -46,14 +46,14 @@
 #           cat /home/runner/.cache/pre-commit/pre-commit.log | tail -20
 
 
-name: pre-commit
+name: pre-commit hooks
 
 on:
   pull_request:
     branches: 
-        - master
-        - feature
-
+        - main
+        - develop
+        
 
 jobs:
   pre-commit:
