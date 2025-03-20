@@ -1,0 +1,47 @@
+name: Simlpe workflow
+
+on:
+    workflow_dispatch: 
+
+jobs:
+
+    general:
+        runs-on: ubuntu-latest
+        steps:
+            - uses: actions-checkout@v2
+            - name: Running from dev
+              run: |
+                echo "hii from ${{ secrets.AWS_SECRET_KEYS }}"
+    
+    
+    DEV:
+        runs-on: ubuntu-latest
+        environment: DEV
+        steps:
+            - uses: actions-checkout@v2
+            - name: Running from dev
+              run: |
+                echo "hii ${{ secrets.SECRET1 }} from region ${{ vars.REGION }}"
+
+    QA:
+        runs-on: ubuntu-latest
+        environment: staging
+        needs: DEV
+        steps:
+            - uses: actions-checkout@v2
+            - name: Running from dev
+              run: |
+                echo "hii from staging"
+    Prod:
+        runs-on: ubuntu-latest
+        environment: Prod
+        needs: QA
+        steps:
+            - uses: actions-checkout@v2
+            - name: Running from dev
+              run: |
+                echo "hii from ${{ secrets.AWS_SECRET_KEYS }}"
+    
+
+
+
