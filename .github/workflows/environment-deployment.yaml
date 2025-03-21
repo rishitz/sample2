@@ -21,7 +21,14 @@ jobs:
             - uses: actions/checkout@v3
             - name: Running from dev
               run: |
-                echo "hii ${{ secrets.SECRET1 }} from region ${{ vars.REGION }}"
+                echo "hii ${{ secrets.DEV_GCP_CREDENTIALS }} from region ${{ vars.REGION }}"
+
+            - name: "GCP Configuration"
+              id: "auth"
+              uses: "google-github-actions/auth@v1"
+              with:
+                credentials_json: "${{ secrets.DEV_GCP_CREDENTIALS }}"
+                project_id: "icardio-dev-project"
 
     QA:
         runs-on: ubuntu-latest
