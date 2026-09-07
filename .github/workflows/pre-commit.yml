@@ -2,9 +2,9 @@ name: PR Checks
 
 on:
   pull_request:
-    branches: 
-        - master
-        - feature
+    branches:
+      - master
+      - feature
 
 jobs:
   precommit:
