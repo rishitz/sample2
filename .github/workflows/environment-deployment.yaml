@@ -1,54 +1,48 @@
 name: Simlpe workflow
 
 on:
-    workflow_dispatch: 
+  workflow_dispatch:
 
 jobs:
+  general:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Running
+        run: |
+          echo "hii from ${{ vars.REGION }}"
 
-    general:
-        runs-on: ubuntu-latest
-        steps:
-            - uses: actions/checkout@v3
-            - name: Running
-              run: |
-                echo "hii from ${{ vars.REGION }}"
-    
-    
-    DEV:
-        runs-on: ubuntu-latest
-        environment: DEV
-        steps:
-            - uses: actions/checkout@v3
-            - name: Running from dev
-              run: |
-                echo "hii ${{ secrets.DEV_GCP_CREDENTIALS }} from region ${{ vars.REGION }}"
+  DEV:
+    runs-on: ubuntu-latest
+    environment: DEV
+    steps:
+      - uses: actions/checkout@v3
+      - name: Running from dev
+        run: |
+          echo "hii ${{ secrets.DEV_GCP_CREDENTIALS }} from region ${{ vars.REGION }}"
 
-            - name: "GCP Configuration"
-              id: "auth"
-              uses: "google-github-actions/auth@v1"
-              with:
-                credentials_json: "${{ secrets.DEV_GCP_CREDENTIALS }}"
-                project_id: "icardio-dev-project"
+      - name: "GCP Configuration"
+        id: "auth"
+        uses: "google-github-actions/auth@v1"
+        with:
+          credentials_json: "${{ secrets.DEV_GCP_CREDENTIALS }}"
+          project_id: "icardio-dev-project"
 
-    QA:
-        runs-on: ubuntu-latest
-        environment: staging
-        needs: DEV
-        steps:
-            - uses: actions/checkout@v3
-            - name: Running from QA
-              run: |
-                echo "hii from staging"
-    Prod:
-        runs-on: ubuntu-latest
-        environment: Prod
-        needs: QA
-        steps:
-            - uses: actions/checkout@v3
-            - name: Running from prod
-              run: |
-                echo "hii from ${{ secrets.AWS_SECRET_KEYS }}"
-    
-
-
-
+  QA:
+    runs-on: ubuntu-latest
+    environment: staging
+    needs: DEV
+    steps:
+      - uses: actions/checkout@v3
+      - name: Running from QA
+        run: |
+          echo "hii from staging"
+  Prod:
+    runs-on: ubuntu-latest
+    environment: Prod
+    needs: QA
+    steps:
+      - uses: actions/checkout@v3
+      - name: Running from prod
+        run: |
+          echo "hii from ${{ secrets.AWS_SECRET_KEYS }}"
